@@ -1,2 +1,21 @@
-package com.hsgumussoy.school_management_project.dto;public class ManagerDto {
+package com.hsgumussoy.school_management_project.dto;
+
+import com.hsgumussoy.school_management_project.entity.School;
+import lombok.*;
+
+import java.util.Date;
+
+@Builder
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class ManagerDto {
+    private Long id;
+    private String name;
+    private String birthPlace;
+    private Date birthDay;
+    private String email;
+    private String branch;
+    private Long schoolId;
 }

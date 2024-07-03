@@ -1,2 +1,70 @@
-package com.hsgumussoy.school_management_project.Impl;public class StudentServiceImp {
+package com.hsgumussoy.school_management_project.Impl;
+
+import com.hsgumussoy.school_management_project.Service.ClassroomService;
+import com.hsgumussoy.school_management_project.Service.StudentService;
+import com.hsgumussoy.school_management_project.dto.StudentDto;
+import com.hsgumussoy.school_management_project.entity.Classroom;
+import com.hsgumussoy.school_management_project.entity.Student;
+import com.hsgumussoy.school_management_project.repository.StudentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class StudentServiceImp implements StudentService {
+    @Autowired
+    private StudentRepository repository;
+    @Autowired
+    private ClassroomService classroomService;
+    @Override
+    public StudentDto save(StudentDto dto) {
+
+        return toDto(repository.save(toEntity(dto)));
+    }
+
+    @Override
+    public StudentDto get(String id) {
+        return toDto(repository.findById(Long.parseLong(id)).get());
+    }
+
+    @Override
+    public void delete(String id) {
+        Long studentId = Long.parseLong(id);
+        removeFromClassroom(studentId);
+        repository.deleteById(studentId);
+    }
+
+
+    //BÖYLE BİR ŞEY KULLANMAK DOĞRU MU?
+    private void removeFromClassroom(Long studentId) {
+        Student student = repository.findById(studentId).orElseThrow();
+        Classroom classroom = student.getClassroom();
+        if (classroom != null) {
+            classroom.getStudentList().remove(student);
+        }
+        student.setClassroom(null);
+    }
+
+    private Student toEntity(StudentDto dto) {
+        return Student.builder()
+                .tckn(dto.getTckn())
+                .id(dto.getId())
+                .birthDay(dto.getBirthDay())
+                .birthPlace(dto.getBirthPlace())
+                .name(dto.getName())
+                .schoolNo(dto.getSchoolNo())
+                .classroom(classroomService.findById(dto.getClassroomId()))
+                .build();
+    }
+
+    private StudentDto toDto(Student student) {
+        return StudentDto.builder()
+                .schoolNo(student.getSchoolNo())
+                .id(student.getId())
+                .tckn(student.getTckn())
+                .birthPlace(student.getBirthPlace())
+                .birthDay(student.getBirthDay())
+                .name(student.getName())
+                .classroomId(student.getClassroom().getId())
+                .build();
+    }
 }

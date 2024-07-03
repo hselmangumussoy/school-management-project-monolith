@@ -1,2 +1,4 @@
-package com.hsgumussoy.school_management_project;public class RecordNotFoundExceptions {
+package com.hsgumussoy.school_management_project;
+
+public class RecordNotFoundExceptions {
 }
