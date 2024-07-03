@@ -1,8 +1,6 @@
-package com.hsgumussoy.school_management_project.Service;
+package com.hsgumussoy.school_management_project.service;
 
 import com.hsgumussoy.school_management_project.dto.TeacherDto;
-import com.hsgumussoy.school_management_project.entity.Teacher;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TeacherService {
     TeacherDto save(TeacherDto dto);

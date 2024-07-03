@@ -1,8 +1,7 @@
-package com.hsgumussoy.school_management_project.Service;
+package com.hsgumussoy.school_management_project.service;
 
 import com.hsgumussoy.school_management_project.dto.ClassroomDto;
 import com.hsgumussoy.school_management_project.entity.Classroom;
-import com.hsgumussoy.school_management_project.entity.School;
 
 import java.util.List;
 

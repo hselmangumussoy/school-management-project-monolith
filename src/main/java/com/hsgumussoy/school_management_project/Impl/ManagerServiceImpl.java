@@ -1,7 +1,7 @@
 package com.hsgumussoy.school_management_project.Impl;
 
-import com.hsgumussoy.school_management_project.Service.ManagerService;
-import com.hsgumussoy.school_management_project.Service.SchoolService;
+import com.hsgumussoy.school_management_project.service.ManagerService;
+import com.hsgumussoy.school_management_project.service.SchoolService;
 import com.hsgumussoy.school_management_project.dto.ManagerDto;
 import com.hsgumussoy.school_management_project.entity.Manager;
 import com.hsgumussoy.school_management_project.repository.ManagerRepository;

@@ -1,10 +1,8 @@
-package com.hsgumussoy.school_management_project.Controller;
+package com.hsgumussoy.school_management_project.controller;
 
-import com.hsgumussoy.school_management_project.Service.TeacherService;
+import com.hsgumussoy.school_management_project.service.TeacherService;
 import com.hsgumussoy.school_management_project.dto.TeacherDto;
-import com.hsgumussoy.school_management_project.repository.TeacherRepository;
 import com.hsgumussoy.school_management_project.request.TeacherRequest;
-import com.hsgumussoy.school_management_project.response.StudentResponse;
 import com.hsgumussoy.school_management_project.response.TeacherResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

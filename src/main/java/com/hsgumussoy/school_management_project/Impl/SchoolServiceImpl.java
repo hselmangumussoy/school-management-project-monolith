@@ -1,9 +1,8 @@
 package com.hsgumussoy.school_management_project.Impl;
 
-import com.hsgumussoy.school_management_project.Service.ClassroomService;
-import com.hsgumussoy.school_management_project.Service.ManagerService;
-import com.hsgumussoy.school_management_project.Service.SchoolService;
-import com.hsgumussoy.school_management_project.Service.StudentService;
+import com.hsgumussoy.school_management_project.service.ClassroomService;
+import com.hsgumussoy.school_management_project.service.ManagerService;
+import com.hsgumussoy.school_management_project.service.SchoolService;
 import com.hsgumussoy.school_management_project.dto.ClassroomDto;
 import com.hsgumussoy.school_management_project.dto.ManagerDto;
 import com.hsgumussoy.school_management_project.dto.SchoolDto;
@@ -12,7 +11,6 @@ import com.hsgumussoy.school_management_project.entity.Classroom;
 import com.hsgumussoy.school_management_project.entity.Manager;
 import com.hsgumussoy.school_management_project.entity.School;
 import com.hsgumussoy.school_management_project.entity.Student;
-import com.hsgumussoy.school_management_project.repository.ClassroomRepository;
 import com.hsgumussoy.school_management_project.repository.SchoolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

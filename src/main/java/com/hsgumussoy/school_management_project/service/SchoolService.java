@@ -1,4 +1,4 @@
-package com.hsgumussoy.school_management_project.Service;
+package com.hsgumussoy.school_management_project.service;
 
 import com.hsgumussoy.school_management_project.dto.SchoolDto;
 import com.hsgumussoy.school_management_project.entity.School;

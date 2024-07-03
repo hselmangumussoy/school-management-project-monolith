@@ -1,7 +1,7 @@
 package com.hsgumussoy.school_management_project.Impl;
 
-import com.hsgumussoy.school_management_project.Service.ClassroomService;
-import com.hsgumussoy.school_management_project.Service.StudentService;
+import com.hsgumussoy.school_management_project.service.ClassroomService;
+import com.hsgumussoy.school_management_project.service.StudentService;
 import com.hsgumussoy.school_management_project.dto.StudentDto;
 import com.hsgumussoy.school_management_project.entity.Classroom;
 import com.hsgumussoy.school_management_project.entity.Student;

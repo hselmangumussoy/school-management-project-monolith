@@ -1,10 +1,9 @@
 package com.hsgumussoy.school_management_project.Impl;
 
-import com.hsgumussoy.school_management_project.Service.ClassroomService;
-import com.hsgumussoy.school_management_project.Service.TeacherService;
+import com.hsgumussoy.school_management_project.service.ClassroomService;
+import com.hsgumussoy.school_management_project.service.TeacherService;
 import com.hsgumussoy.school_management_project.dto.TeacherDto;
 import com.hsgumussoy.school_management_project.entity.Classroom;
-import com.hsgumussoy.school_management_project.entity.Student;
 import com.hsgumussoy.school_management_project.entity.Teacher;
 import com.hsgumussoy.school_management_project.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
