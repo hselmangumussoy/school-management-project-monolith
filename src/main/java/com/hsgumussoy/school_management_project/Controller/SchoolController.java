@@ -1,0 +1,11 @@
+package com.hsgumussoy.school_management_project;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("schools")
+public class SchoolController {
+
+    
+}
