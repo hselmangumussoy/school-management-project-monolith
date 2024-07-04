@@ -1,5 +1,6 @@
 package com.hsgumussoy.school_management_project.Impl;
 
+import com.hsgumussoy.school_management_project.exceptions.RecordNotFoundExceptions;
 import com.hsgumussoy.school_management_project.service.ClassroomService;
 import com.hsgumussoy.school_management_project.service.SchoolService;
 import com.hsgumussoy.school_management_project.dto.ClassroomDto;
@@ -34,7 +35,8 @@ public class ClassroomServiceImpl implements ClassroomService {
 
     @Override
     public ClassroomDto get(String id) {
-        return toDto(repository.findById(Long.parseLong(id)).get());
+        return toDto(repository.findById(Long.parseLong(id))
+                .orElseThrow(()-> new RecordNotFoundExceptions(5000,"Classroom not found!")));
     }
 
     @Override
@@ -67,6 +69,9 @@ public class ClassroomServiceImpl implements ClassroomService {
 
             existClassroom.getStudentList().addAll(students);
         }
+        else{
+            throw new RecordNotFoundExceptions(5000, "Student not found");
+        }
 
         existClassroom.getTeacherList().clear();
         if(dto.getTeacherList() != null){
@@ -75,6 +80,9 @@ public class ClassroomServiceImpl implements ClassroomService {
                     .toList();
 
             existClassroom.getTeacherList().addAll(teachers);
+        }
+        else{
+            throw new RecordNotFoundExceptions(5000, "Teacher not found");
         }
 
         return toDto(repository.save(existClassroom));

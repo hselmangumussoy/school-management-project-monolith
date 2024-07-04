@@ -1,5 +1,6 @@
 package com.hsgumussoy.school_management_project.Impl;
 
+import com.hsgumussoy.school_management_project.exceptions.RecordNotFoundExceptions;
 import com.hsgumussoy.school_management_project.service.ManagerService;
 import com.hsgumussoy.school_management_project.service.SchoolService;
 import com.hsgumussoy.school_management_project.dto.ManagerDto;
@@ -25,7 +26,8 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public ManagerDto get(String id) {
-        return toDto(repository.findById(Long.parseLong(id)).get());
+        return toDto(repository.findById(Long.parseLong(id))
+                .orElseThrow(()-> new RecordNotFoundExceptions(5000,"Manager not found!")));
     }
 
     @Override

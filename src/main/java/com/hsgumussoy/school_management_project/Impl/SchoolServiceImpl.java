@@ -2,6 +2,7 @@ package com.hsgumussoy.school_management_project.Impl;
 
 import com.hsgumussoy.school_management_project.dto.*;
 import com.hsgumussoy.school_management_project.entity.*;
+import com.hsgumussoy.school_management_project.exceptions.RecordNotFoundExceptions;
 import com.hsgumussoy.school_management_project.service.ClassroomService;
 import com.hsgumussoy.school_management_project.service.ManagerService;
 import com.hsgumussoy.school_management_project.service.SchoolService;
@@ -39,7 +40,8 @@ public class SchoolServiceImpl implements SchoolService {
 
     @Override
     public SchoolDto get(String id) {
-        return toDto(repository.findById(Long.parseLong(id)).get());
+        return toDto(repository.findById(Long.parseLong(id))
+                .orElseThrow(()-> new RecordNotFoundExceptions(5000,"School not found!")));
     }
 
     @Override
@@ -64,6 +66,9 @@ public class SchoolServiceImpl implements SchoolService {
 
             exsistSchool.getManagerList().addAll(managers);
         }
+        else{
+            throw new RecordNotFoundExceptions(5000, "Manager not found");
+        }
 
         exsistSchool.getClassroomList().clear();
         if(dto.getClassroomList() != null){
@@ -72,6 +77,9 @@ public class SchoolServiceImpl implements SchoolService {
                     .toList();
 
             exsistSchool.getClassroomList().addAll(classrooms);
+        }
+        else{
+            throw new RecordNotFoundExceptions(5000, "Classroom not found");
         }
 
         return toDto(exsistSchool);

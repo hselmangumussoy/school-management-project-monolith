@@ -1,5 +1,6 @@
 package com.hsgumussoy.school_management_project.Impl;
 
+import com.hsgumussoy.school_management_project.exceptions.RecordNotFoundExceptions;
 import com.hsgumussoy.school_management_project.service.ClassroomService;
 import com.hsgumussoy.school_management_project.service.StudentService;
 import com.hsgumussoy.school_management_project.dto.StudentDto;
@@ -26,7 +27,8 @@ public class StudentServiceImp implements StudentService {
 
     @Override
     public StudentDto get(String id) {
-        return toDto(repository.findById(Long.parseLong(id)).get());
+        return toDto(repository.findById(Long.parseLong(id))
+                .orElseThrow(()-> new RecordNotFoundExceptions(5000,"Student not found!")));
     }
 
     @Override
