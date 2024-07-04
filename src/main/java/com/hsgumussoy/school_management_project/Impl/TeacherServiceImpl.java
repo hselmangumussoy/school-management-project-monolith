@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class TeacherServiceImpl implements TeacherService {
     @Autowired
@@ -58,7 +61,15 @@ public class TeacherServiceImpl implements TeacherService {
         return toDto(repository.save(existTeacher));
     }
 
+    @Override
+    public List<TeacherDto> getAll() {
+        List<TeacherDto> teacherDtoList =new ArrayList<>();
 
+        for (Teacher teacher:repository.findAll() ){
+            teacherDtoList.add(toDto(teacher));
+        }
+        return teacherDtoList;
+    }
 
 
     private Teacher toEntity(TeacherDto dto) {

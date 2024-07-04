@@ -1,6 +1,5 @@
 package com.hsgumussoy.school_management_project.Impl;
 
-import com.hsgumussoy.school_management_project.entity.Student;
 import com.hsgumussoy.school_management_project.service.ManagerService;
 import com.hsgumussoy.school_management_project.service.SchoolService;
 import com.hsgumussoy.school_management_project.dto.ManagerDto;
@@ -10,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 @Service
 public class ManagerServiceImpl implements ManagerService {
@@ -55,6 +55,16 @@ public class ManagerServiceImpl implements ManagerService {
         //existManager.setClassroom();
 
         return toDto(repository.save(existManager));
+    }
+
+    @Override
+    public List<ManagerDto> getAll() {
+        List<ManagerDto> managerDtoList =new ArrayList<>();
+
+        for (Manager manager:repository.findAll() ){
+            managerDtoList.add(toDto(manager));
+        }
+        return managerDtoList;
     }
 
     private Manager toEntity(ManagerDto dto) {

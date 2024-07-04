@@ -7,6 +7,9 @@ import com.hsgumussoy.school_management_project.response.StudentResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("students")
 public class StudentController {
@@ -27,6 +30,16 @@ public class StudentController {
     @DeleteMapping("/{id}")
     private void delete(@PathVariable String id){
         service.delete(id);
+    }
+    @GetMapping
+    private List<StudentResponse> getAll(){
+        return mapStudentResponses(service.getAll());
+    }
+
+    private List<StudentResponse> mapStudentResponses(List<StudentDto> dtos) {
+        return dtos.stream()
+                .map(this::toResponse)
+                .collect(Collectors.toList());
     }
     private StudentResponse toResponse(StudentDto dto){
         return StudentResponse.builder()

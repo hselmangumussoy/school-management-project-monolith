@@ -10,6 +10,7 @@ public interface ClassroomService {
     ClassroomDto get(String id);
     void delete(String id);
     ClassroomDto update(String id, ClassroomDto dto);
+    List<ClassroomDto> getAll();
     List<Classroom> findBySchoolId(Long schoolId);
     Classroom findById(Long classroomId);
 

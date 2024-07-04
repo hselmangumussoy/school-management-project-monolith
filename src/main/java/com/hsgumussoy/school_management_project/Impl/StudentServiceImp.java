@@ -9,6 +9,9 @@ import com.hsgumussoy.school_management_project.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class StudentServiceImp implements StudentService {
     @Autowired
@@ -55,6 +58,16 @@ public class StudentServiceImp implements StudentService {
         //existStudent.setClassroom();
 
         return toDto(repository.save(existStudent));
+    }
+
+    @Override
+    public List<StudentDto> getAll() {
+        List<StudentDto> studentDtoList =new ArrayList<>();
+
+        for (Student student:repository.findAll() ){
+            studentDtoList.add(toDto(student));
+        }
+        return studentDtoList;
     }
 
 

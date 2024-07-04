@@ -35,22 +35,12 @@ public class SchoolController {
     }
     @GetMapping
     private List<SchoolResponse> getAll(){
-        List<SchoolDto> schoolDtoList = service.getAll();
-
-        return schoolDtoList.stream()
+        return mapSchoolResponses(service.getAll());
+    }
+    private List<SchoolResponse> mapSchoolResponses(List<SchoolDto> dtos){
+        return dtos.stream()
                 .map(this::toResponse)//her bir dto response a çevriliyor ve response dönüyor.
                 .collect(Collectors.toList());
-
-    }
-
-
-
-    private SchoolDto toDto(SchoolRequest reqest) {
-        return SchoolDto.builder()
-                .name(reqest.getName())
-                .address(reqest.getAddress())
-                //.id(reqest.getClassroomId()) // emin değilim
-                .build();
     }
     private SchoolResponse toResponse(SchoolDto dto){
         return SchoolResponse.builder()
@@ -61,5 +51,14 @@ public class SchoolController {
                 .managerList(dto.getManagerList())
                 .build();
     }
+
+    private SchoolDto toDto(SchoolRequest reqest) {
+        return SchoolDto.builder()
+                .name(reqest.getName())
+                .address(reqest.getAddress())
+                //.id(reqest.getClassroomId()) // emin değilim
+                .build();
+    }
+
 
 }

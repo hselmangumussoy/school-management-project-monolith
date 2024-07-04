@@ -7,6 +7,9 @@ import com.hsgumussoy.school_management_project.response.ManagerResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("managers")
 public class ManagerController {
@@ -29,6 +32,16 @@ public class ManagerController {
     @PutMapping("/{id}")
     private ManagerResponse update(@PathVariable String id, @RequestBody ManagerRequest request){
         return toResponse(service.update(id,toDto(request)));
+    }
+    @GetMapping
+    private List<ManagerResponse> getAll(){
+        return mapManagerResponses(service.getAll());
+    }
+
+    private List<ManagerResponse> mapManagerResponses(List<ManagerDto> dtos) {
+        return dtos.stream()
+                .map(this::toResponse)
+                .collect(Collectors.toList());
     }
     private ManagerResponse toResponse(ManagerDto dto){
         return ManagerResponse.builder()
