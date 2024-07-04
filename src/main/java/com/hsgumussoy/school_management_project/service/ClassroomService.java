@@ -9,6 +9,7 @@ public interface ClassroomService {
     ClassroomDto save(ClassroomDto dto);
     ClassroomDto get(String id);
     void delete(String id);
+    ClassroomDto update(String id, ClassroomDto dto);
     List<Classroom> findBySchoolId(Long schoolId);
     Classroom findById(Long classroomId);
 
