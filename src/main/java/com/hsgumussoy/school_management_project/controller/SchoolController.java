@@ -26,7 +26,10 @@ public class SchoolController {
     private void delete(@PathVariable String id){
         service.delete(id);
     }
-    @PutMapping
+    @PutMapping("/{id}")
+    private SchoolResponse update(@PathVariable String id, @RequestBody SchoolRequest request){
+        return toResponse(service.update(id,toDto(request)));
+    }
 
 
 

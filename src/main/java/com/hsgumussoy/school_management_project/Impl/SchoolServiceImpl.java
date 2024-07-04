@@ -12,6 +12,7 @@ import com.hsgumussoy.school_management_project.entity.Manager;
 import com.hsgumussoy.school_management_project.entity.School;
 import com.hsgumussoy.school_management_project.entity.Student;
 import com.hsgumussoy.school_management_project.repository.SchoolRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,6 +51,37 @@ public class SchoolServiceImpl implements SchoolService {
     public void delete(String id) {
         repository.deleteById(Long.parseLong(id));
     }
+
+    @Override
+    @Transactional
+    public SchoolDto update(String id, SchoolDto dto) {
+        School exsistSchool = repository.findById(Long.parseLong(id))
+                .orElseThrow(()-> new RuntimeException("School not found with id: " + id));
+
+        exsistSchool.setName(dto.getName());
+        exsistSchool.setAddress(dto.getAddress());
+
+        exsistSchool.getManagerList().clear();
+        if (dto.getManagerList() != null) {
+            List<Manager> managers = dto.getManagerList().stream()
+                    .map(this::toManagerEntity)
+                    .toList();
+
+            exsistSchool.getManagerList().addAll(managers);
+        }
+
+        exsistSchool.getClassroomList().clear();
+        if(dto.getClassroomList() != null){
+            List<Classroom> classrooms = dto.getClassroomList().stream()
+                    .map(this::toClassroomEntity)
+                    .toList();
+
+            exsistSchool.getClassroomList().addAll(classrooms);
+        }
+
+        return toDto(exsistSchool);
+    }
+
 
 
     @Override

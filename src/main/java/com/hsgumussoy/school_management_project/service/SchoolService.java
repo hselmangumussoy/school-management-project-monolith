@@ -8,6 +8,7 @@ public interface SchoolService {
     public SchoolDto save(SchoolDto dto);
     public SchoolDto get(String id);
     void delete(String id);
+    SchoolDto update(String id, SchoolDto dto);
     public School findById(Long schoolId);
 
 
