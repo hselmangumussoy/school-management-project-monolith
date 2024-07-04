@@ -25,6 +25,10 @@ public class TeacherController {
     private void delete(@PathVariable String id){
         service.delete(id);
     }
+    @PutMapping("/{id}")
+    private TeacherResponse update(@PathVariable String id, @RequestBody TeacherRequest request){
+        return toResponse(service.update(id,toDto(request)));
+    }
     private TeacherResponse toResponse(TeacherDto dto){
         return TeacherResponse.builder()
                 .id(dto.getId())

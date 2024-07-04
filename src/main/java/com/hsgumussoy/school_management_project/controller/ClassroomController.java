@@ -1,7 +1,5 @@
 package com.hsgumussoy.school_management_project.controller;
 
-import com.hsgumussoy.school_management_project.request.SchoolRequest;
-import com.hsgumussoy.school_management_project.response.SchoolResponse;
 import com.hsgumussoy.school_management_project.service.ClassroomService;
 import com.hsgumussoy.school_management_project.dto.ClassroomDto;
 import com.hsgumussoy.school_management_project.request.ClassroomRequest;
