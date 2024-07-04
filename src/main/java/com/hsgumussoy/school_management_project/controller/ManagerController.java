@@ -1,5 +1,7 @@
 package com.hsgumussoy.school_management_project.controller;
 
+import com.hsgumussoy.school_management_project.request.ClassroomRequest;
+import com.hsgumussoy.school_management_project.response.ClassroomResponse;
 import com.hsgumussoy.school_management_project.service.ManagerService;
 import com.hsgumussoy.school_management_project.dto.ManagerDto;
 import com.hsgumussoy.school_management_project.request.ManagerRequest;
@@ -26,7 +28,10 @@ public class ManagerController {
     private void delete(@PathVariable String id){
         service.delete(id);
     }
-
+    @PutMapping("/{id}")
+    private ManagerResponse update(@PathVariable String id, @RequestBody ManagerRequest request){
+        return toResponse(service.update(id,toDto(request)));
+    }
     private ManagerResponse toResponse(ManagerDto dto){
         return ManagerResponse.builder()
                 .id(dto.getId())

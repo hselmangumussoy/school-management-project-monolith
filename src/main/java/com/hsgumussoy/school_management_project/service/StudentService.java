@@ -8,4 +8,5 @@ public interface StudentService {
     public StudentDto get(String id);
 
     void delete(String id);
+    StudentDto update(String id, StudentDto dto);
 }

@@ -1,5 +1,6 @@
 package com.hsgumussoy.school_management_project.Impl;
 
+import com.hsgumussoy.school_management_project.entity.Student;
 import com.hsgumussoy.school_management_project.service.ManagerService;
 import com.hsgumussoy.school_management_project.service.SchoolService;
 import com.hsgumussoy.school_management_project.dto.ManagerDto;
@@ -41,6 +42,20 @@ public class ManagerServiceImpl implements ManagerService {
         }
         manager.setSchool(null);
     }
+    @Override
+    public ManagerDto update(String id, ManagerDto dto) {
+        Manager existManager = repository.findById(Long.parseLong(id))
+                .orElseThrow(()->new RuntimeException("Manager not found with id "+id));
+
+        existManager.setEmail(dto.getEmail());
+        existManager.setBranch(dto.getBranch());
+        existManager.setBirthPlace(dto.getBirthPlace());
+        existManager.setName(dto.getName());
+        existManager.setBirthDay(dto.getBirthDay());
+        //existManager.setClassroom();
+
+        return toDto(repository.save(existManager));
+    }
 
     private Manager toEntity(ManagerDto dto) {
         return Manager.builder()
@@ -57,7 +72,7 @@ public class ManagerServiceImpl implements ManagerService {
                 .id(manager.getId())
                 .email(manager.getEmail())
                 .branch(manager.getBranch())
-                .birthPlace(manager.getBirthPlace())
+                .birthDay(manager.getBirthDay())
                 .birthPlace(manager.getBirthPlace())
                 .schoolId(manager.getId())
                 .name(manager.getName())
@@ -68,4 +83,6 @@ public class ManagerServiceImpl implements ManagerService {
         return repository.findBySchoolId(schoolId);
 
     }
+
+
 }

@@ -9,7 +9,9 @@ public interface ManagerService {
     public ManagerDto save(ManagerDto dto);
     public ManagerDto get(String id);
     public List<Manager> findBySchoolId(Long schoolId) ;
-
+    ManagerDto update(String id, ManagerDto dto);
 
     void delete(String id);
+
+
 }

@@ -32,8 +32,6 @@ public class StudentServiceImp implements StudentService {
         removeFromClassroom(studentId);
         repository.deleteById(studentId);
     }
-
-
     //BÖYLE BİR ŞEY KULLANMAK DOĞRU MU?
     private void removeFromClassroom(Long studentId) {
         Student student = repository.findById(studentId).orElseThrow();
@@ -43,6 +41,22 @@ public class StudentServiceImp implements StudentService {
         }
         student.setClassroom(null);
     }
+
+    @Override
+    public StudentDto update(String id, StudentDto dto) {
+        Student existStudent = repository.findById(Long.parseLong(id))
+                .orElseThrow(()->new RuntimeException("Student not found with id "+id));
+
+        existStudent.setTckn(dto.getTckn());
+        existStudent.setSchoolNo(dto.getSchoolNo());
+        existStudent.setBirthPlace(dto.getBirthPlace());
+        existStudent.setName(dto.getName());
+        existStudent.setBirthDay(dto.getBirthDay());
+        //existStudent.setClassroom();
+
+        return toDto(repository.save(existStudent));
+    }
+
 
     private Student toEntity(StudentDto dto) {
         return Student.builder()

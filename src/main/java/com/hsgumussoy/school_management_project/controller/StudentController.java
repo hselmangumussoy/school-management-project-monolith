@@ -1,5 +1,7 @@
 package com.hsgumussoy.school_management_project.controller;
 
+import com.hsgumussoy.school_management_project.request.ManagerRequest;
+import com.hsgumussoy.school_management_project.response.ManagerResponse;
 import com.hsgumussoy.school_management_project.service.StudentService;
 import com.hsgumussoy.school_management_project.dto.StudentDto;
 import com.hsgumussoy.school_management_project.request.StudentRequest;
@@ -20,7 +22,10 @@ public class StudentController {
     private StudentResponse get(@PathVariable String id){
         return toResponse(service.get(id));
     }
-
+    @PutMapping("/{id}")
+    private StudentResponse update(@PathVariable String id, @RequestBody StudentRequest request){
+        return toResponse(service.update(id,toDto(request)));
+    }
     @DeleteMapping("/{id}")
     private void delete(@PathVariable String id){
         service.delete(id);
