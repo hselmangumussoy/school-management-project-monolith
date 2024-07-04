@@ -8,7 +8,7 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class StudentResponse {
+public class StudentResponse extends BaseResponse{
     private Long id;
     private String name;
     private Date birthDay;

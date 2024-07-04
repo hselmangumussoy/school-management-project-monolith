@@ -9,7 +9,7 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TeacherResponse {
+public class TeacherResponse extends BaseResponse{
     private Long id;
     private String name;
     private String birthPlace;

@@ -12,7 +12,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClassroomResponse {
+public class ClassroomResponse extends BaseResponse{
     private Long id;
     private String name;
     private List<StudentDto> studentList;

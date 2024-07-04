@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class SchoolResponse {
+public class SchoolResponse extends BaseResponse{
     private Long id;
     private String name;
     private String address;
