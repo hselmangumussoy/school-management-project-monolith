@@ -41,7 +41,6 @@ public class ClassroomServiceImpl implements ClassroomService {
         removeFromSchool(classroomId);
         repository.deleteById(classroomId);
     }
-
     private void removeFromSchool(Long classroomId) {
         Classroom classroom = repository.findById(classroomId).orElseThrow();
         if (classroom.getSchool() != null) {
@@ -49,6 +48,37 @@ public class ClassroomServiceImpl implements ClassroomService {
         }
         classroom.setSchool(null);
     }
+
+    @Override
+    public ClassroomDto update(String id, ClassroomDto dto) {
+        Classroom existClassroom = repository.findById(Long.parseLong(id))
+                .orElseThrow(()->new RuntimeException("Classroom not found with id: " + id));
+
+        //existClassroom.setSchool();
+        existClassroom.setName(dto.getName());
+
+        existClassroom.getStudentList().clear();
+        if(dto.getStudentList() != null){
+            List<Student> students = dto.getStudentList().stream()
+                    .map(this::toStudentEntity)
+                    .toList();
+
+            existClassroom.getStudentList().addAll(students);
+        }
+
+        existClassroom.getTeacherList().clear();
+        if(dto.getTeacherList() != null){
+            List<Teacher> teachers = dto.getTeacherList().stream()
+                    .map(this::toTeacherEntity)
+                    .toList();
+
+            existClassroom.getTeacherList().addAll(teachers);
+        }
+
+        return toDto(repository.save(existClassroom));
+    }
+
+
 
     private Classroom toEntity(ClassroomDto dto) {
         return Classroom.builder()
