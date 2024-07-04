@@ -1,6 +1,5 @@
 package com.hsgumussoy.school_management_project.dto;
 
-import com.hsgumussoy.school_management_project.entity.Manager;
 import lombok.*;
 
 import java.util.List;

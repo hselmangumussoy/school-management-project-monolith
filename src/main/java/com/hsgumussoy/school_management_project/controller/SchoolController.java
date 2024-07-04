@@ -7,6 +7,9 @@ import com.hsgumussoy.school_management_project.response.SchoolResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("schools")
 public class SchoolController {
@@ -29,6 +32,15 @@ public class SchoolController {
     @PutMapping("/{id}")
     private SchoolResponse update(@PathVariable String id, @RequestBody SchoolRequest request){
         return toResponse(service.update(id,toDto(request)));
+    }
+    @GetMapping
+    private List<SchoolResponse> getAll(){
+        List<SchoolDto> schoolDtoList = service.getAll();
+
+        return schoolDtoList.stream()
+                .map(this::toResponse)//her bir dto response a çevriliyor ve response dönüyor.
+                .collect(Collectors.toList());
+
     }
 
 

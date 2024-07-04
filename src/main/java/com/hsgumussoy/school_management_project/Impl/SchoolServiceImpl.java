@@ -1,21 +1,16 @@
 package com.hsgumussoy.school_management_project.Impl;
 
+import com.hsgumussoy.school_management_project.dto.*;
+import com.hsgumussoy.school_management_project.entity.*;
 import com.hsgumussoy.school_management_project.service.ClassroomService;
 import com.hsgumussoy.school_management_project.service.ManagerService;
 import com.hsgumussoy.school_management_project.service.SchoolService;
-import com.hsgumussoy.school_management_project.dto.ClassroomDto;
-import com.hsgumussoy.school_management_project.dto.ManagerDto;
-import com.hsgumussoy.school_management_project.dto.SchoolDto;
-import com.hsgumussoy.school_management_project.dto.StudentDto;
-import com.hsgumussoy.school_management_project.entity.Classroom;
-import com.hsgumussoy.school_management_project.entity.Manager;
-import com.hsgumussoy.school_management_project.entity.School;
-import com.hsgumussoy.school_management_project.entity.Student;
 import com.hsgumussoy.school_management_project.repository.SchoolRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -82,6 +77,14 @@ public class SchoolServiceImpl implements SchoolService {
         return toDto(exsistSchool);
     }
 
+    @Override
+    public List<SchoolDto> getAll() {
+        List<SchoolDto> schoolDtoList = new ArrayList<>();
+        for (School school: repository.findAll()){
+            schoolDtoList.add(toDto(school));
+        }
+        return schoolDtoList;
+    }
 
 
     @Override
@@ -122,8 +125,26 @@ public class SchoolServiceImpl implements SchoolService {
         classroom.setName(classroomDto.getName());
         classroom.getSchool().setId(classroom.getId());  //DİKKAT
         classroom.setStudentList(mapStudents(classroomDto.getStudentList())); // Değişiklik burada
+        classroom.setTeacherList(mapTeachers(classroomDto.getTeacherList()));
 
         return classroom;
+    }
+
+    private List<Teacher> mapTeachers(List<TeacherDto> teacherDtos) {
+        return teacherDtos.stream()
+                .map(this::toTeachersEntity)
+                .collect(Collectors.toList());
+    }
+
+    private Teacher toTeachersEntity(TeacherDto teacherDto) {
+        Teacher teacher= new Teacher();
+        teacher.setName(teacherDto.getName());
+        teacher.setEmail(teacherDto.getEmail());
+        teacher.setBranch(teacherDto.getBranch());
+        teacher.setBirthPlace(teacherDto.getBirthPlace());
+        teacher.setBirthDay(teacherDto.getBirthDay());
+        teacher.getClassroom().setId(teacherDto.getClassroomId());
+        return teacher;
     }
 
     private List<Student> mapStudents(List<StudentDto> studentDtos) {
@@ -138,7 +159,7 @@ public class SchoolServiceImpl implements SchoolService {
         student.setName(studentDto.getName());
         student.setBirthDay(studentDto.getBirthDay());
         student.setBirthPlace(studentDto.getBirthPlace());
-        student.getClassroom().setId(studentDto.getId());
+        student.getClassroom().setId(studentDto.getClassroomId());
         student.setSchoolNo(studentDto.getSchoolNo());
         student.setTckn(studentDto.getTckn());
 
@@ -181,11 +202,30 @@ public class SchoolServiceImpl implements SchoolService {
         classroomDto.setId(classroom.getId());
         classroomDto.setName(classroom.getName());
         classroomDto.setStudentList(mapStudentsDto(classroom.getStudentList()));
+        classroomDto.setTeacherList(mapTeachersDto(classroom.getTeacherList()));
         classroomDto.setSchoolId(classroom.getSchool().getId());
 
         return classroomDto;
     }
 
+    private List<TeacherDto> mapTeachersDto(List<Teacher> students) {
+        return students.stream()
+                .map(this::mapTeachertDto)
+                .collect(Collectors.toList());
+    }
+
+    private TeacherDto mapTeachertDto(Teacher teacher) {
+        TeacherDto teacherDto = new TeacherDto();
+        teacherDto.setId(teacher.getId());
+        teacherDto.setName(teacher.getName());
+        teacherDto.setBirthDay(teacher.getBirthDay());
+        teacherDto.setBirthPlace(teacher.getBirthPlace());
+        teacherDto.setClassroomId(teacher.getClassroom().getId());
+        teacherDto.setEmail(teacher.getEmail());
+        teacherDto.setBranch(teacher.getBranch());
+
+        return teacherDto;
+    }
     private List<StudentDto> mapStudentsDto(List<Student> students) {
         return students.stream()
                 .map(this::mapStudentDto)

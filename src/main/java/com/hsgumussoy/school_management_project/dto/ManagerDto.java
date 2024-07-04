@@ -1,6 +1,5 @@
 package com.hsgumussoy.school_management_project.dto;
 
-import com.hsgumussoy.school_management_project.entity.School;
 import lombok.*;
 
 import java.util.Date;

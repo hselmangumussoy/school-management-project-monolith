@@ -27,6 +27,7 @@ public class ClassroomServiceImpl implements ClassroomService {
     @Override
     public ClassroomDto save(ClassroomDto dto) {
         Classroom classroom = toEntity(dto);
+
         return toDto(repository.save(classroom));
     }
 
@@ -140,9 +141,11 @@ public class ClassroomServiceImpl implements ClassroomService {
         if(classroom.getStudentList() != null){
             dto.setStudentList(mapStudentDtos(classroom.getStudentList()));
         }
-        if(classroom.getTeacherList() != null){
+
+        if (classroom.getTeacherList() != null) {
             dto.setTeacherList(mapTeacherDtos(classroom.getTeacherList()));
         }
+
         dto.setSchoolId(classroom.getSchool().getId());
 
         return dto;
