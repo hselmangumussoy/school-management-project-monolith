@@ -18,31 +18,37 @@ public class SchoolController {
     private SchoolService service;
 
     @PostMapping
-    private SchoolResponse save(@RequestBody SchoolRequest reqest ){
+    private SchoolResponse save(@RequestBody SchoolRequest reqest) {
         return toResponse(service.save(toDto(reqest)));
     }
+
     @GetMapping("/{id}")
-    private SchoolResponse get(@PathVariable String id){
+    private SchoolResponse get(@PathVariable String id) {
         return toResponse(service.get(id));
     }
+
     @DeleteMapping("/{id}")
-    private void delete(@PathVariable String id){
+    private void delete(@PathVariable String id) {
         service.delete(id);
     }
+
     @PutMapping("/{id}")
-    private SchoolResponse update(@PathVariable String id, @RequestBody SchoolRequest request){
-        return toResponse(service.update(id,toDto(request)));
+    private SchoolResponse update(@PathVariable String id, @RequestBody SchoolRequest request) {
+        return toResponse(service.update(id, toDto(request)));
     }
+
     @GetMapping
-    private List<SchoolResponse> getAll(){
+    private List<SchoolResponse> getAll() {
         return mapSchoolResponses(service.getAll());
     }
-    private List<SchoolResponse> mapSchoolResponses(List<SchoolDto> dtos){
+
+    private List<SchoolResponse> mapSchoolResponses(List<SchoolDto> dtos) {
         return dtos.stream()
                 .map(this::toResponse)//her bir dto response a çevriliyor ve response dönüyor.
                 .collect(Collectors.toList());
     }
-    private SchoolResponse toResponse(SchoolDto dto){
+
+    private SchoolResponse toResponse(SchoolDto dto) {
         return SchoolResponse.builder()
                 .id(dto.getId())
                 .address(dto.getAddress())

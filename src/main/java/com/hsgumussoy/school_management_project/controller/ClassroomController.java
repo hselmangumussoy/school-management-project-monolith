@@ -21,20 +21,24 @@ public class ClassroomController {
     public ClassroomResponse save(@RequestBody ClassroomRequest request) {
         return toResponse(service.save(toDto(request)));
     }
+
     @GetMapping("/{id}")
-    private ClassroomResponse get(@PathVariable String id){
+    private ClassroomResponse get(@PathVariable String id) {
         return toResponse(service.get(id));
     }
+
     @DeleteMapping("/{id}")
-    private void delete(@PathVariable String id){
+    private void delete(@PathVariable String id) {
         service.delete(id);
     }
+
     @PutMapping("/{id}")
-    private ClassroomResponse update(@PathVariable String id, @RequestBody ClassroomRequest request){
-        return toResponse(service.update(id,toDto(request)));
+    private ClassroomResponse update(@PathVariable String id, @RequestBody ClassroomRequest request) {
+        return toResponse(service.update(id, toDto(request)));
     }
+
     @GetMapping
-    private List<ClassroomResponse> getAll(){
+    private List<ClassroomResponse> getAll() {
         return mapClassroomResponses(service.getAll());
     }
 
@@ -43,6 +47,7 @@ public class ClassroomController {
                 .map(this::toResponse)
                 .collect(Collectors.toList());
     }
+
     private ClassroomResponse toResponse(ClassroomDto dto) {
         return ClassroomResponse.builder()
                 .id(dto.getId())

@@ -1,4 +1,4 @@
-package com.hsgumussoy.school_management_project.Impl;
+package com.hsgumussoy.school_management_project.impl;
 
 import com.hsgumussoy.school_management_project.dto.*;
 import com.hsgumussoy.school_management_project.entity.*;

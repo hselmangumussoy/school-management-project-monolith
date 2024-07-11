@@ -8,12 +8,16 @@ import java.util.List;
 
 public interface ManagerService {
     public ManagerDto save(ManagerDto dto);
-    public ManagerDto get(String id);
-    public List<Manager> findBySchoolId(Long schoolId) ;
-    ManagerDto update(String id, ManagerDto dto);
-    List<ManagerDto> getAll();
-    void delete(String id);
 
+    public ManagerDto get(String id);
+
+    public List<Manager> findBySchoolId(Long schoolId);
+
+    ManagerDto update(String id, ManagerDto dto);
+
+    List<ManagerDto> getAll();
+
+    void delete(String id);
 
 
 }

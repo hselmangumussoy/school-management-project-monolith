@@ -11,7 +11,7 @@ import java.util.List;
 @Builder
 @Setter
 @Getter
-public class    School {
+public class School {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,10 +20,10 @@ public class    School {
     private String name;
     private String address;
 
-    @OneToMany(mappedBy = "school",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "school", cascade = CascadeType.ALL, fetch= FetchType.EAGER)
     private List<Manager> managerList;
 
-    @OneToMany(mappedBy = "school",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "school", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Classroom> classroomList;
 
 

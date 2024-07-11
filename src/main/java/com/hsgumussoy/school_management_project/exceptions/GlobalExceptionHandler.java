@@ -28,4 +28,5 @@ public class GlobalExceptionHandler {
         ResponseEntity<Object> entity = new ResponseEntity<>(response,HttpStatus.OK);
         return entity;
     }
+
 }

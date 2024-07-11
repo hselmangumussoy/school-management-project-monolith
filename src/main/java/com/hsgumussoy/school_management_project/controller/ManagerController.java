@@ -7,6 +7,8 @@ import com.hsgumussoy.school_management_project.response.ManagerResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,23 +20,27 @@ public class ManagerController {
     private ManagerService service;
 
     @PostMapping
-    private ManagerResponse save(@RequestBody ManagerRequest request){
+    private ManagerResponse save(@RequestBody ManagerRequest request) {
         return toResponse(service.save(toDto(request)));
     }
+
     @GetMapping("/{id}")
-    private ManagerResponse get(@PathVariable String id){
+    private ManagerResponse get(@PathVariable String id) {
         return toResponse(service.get(id));
     }
+
     @DeleteMapping("/{id}")
-    private void delete(@PathVariable String id){
+    private void delete(@PathVariable String id) {
         service.delete(id);
     }
+
     @PutMapping("/{id}")
-    private ManagerResponse update(@PathVariable String id, @RequestBody ManagerRequest request){
-        return toResponse(service.update(id,toDto(request)));
+    private ManagerResponse update(@PathVariable String id, @RequestBody ManagerRequest request) {
+        return toResponse(service.update(id, toDto(request)));
     }
+
     @GetMapping
-    private List<ManagerResponse> getAll(){
+    private List<ManagerResponse> getAll() {
         return mapManagerResponses(service.getAll());
     }
 
@@ -43,7 +49,9 @@ public class ManagerController {
                 .map(this::toResponse)
                 .collect(Collectors.toList());
     }
-    private ManagerResponse toResponse(ManagerDto dto){
+
+
+    private ManagerResponse toResponse(ManagerDto dto) {
         return ManagerResponse.builder()
                 .id(dto.getId())
                 .schoolId(dto.getSchoolId())
@@ -54,6 +62,7 @@ public class ManagerController {
                 .name(dto.getName())
                 .build();
     }
+
     private ManagerDto toDto(ManagerRequest request) {
         return ManagerDto.builder()
                 .name(request.getName())
